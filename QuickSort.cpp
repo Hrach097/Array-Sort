@@ -23,19 +23,19 @@ int partition(int* arr, int first, int last) {
 		sortFirstMiddleLast(arr, first, mid, last);
 		swap(arr[mid], arr[last - 1]);
 		
-		int privotIndex = last - 1;
-		int privot = arr[privotIndex];
+		int pivotIndex = last - 1;
+		int pivot = arr[pivotIndex];
 		int indexFromLeft = first + 1;
 		int indexFromRight = last - 2;
 
 
 		bool done = false;
 		while(!done) {
-				while(arr[indexFromLeft] < privot) {
+				while(arr[indexFromLeft] < pivot) {
 						++indexFromLeft;
 				}
 
-				while(arr[indexFromRight] > privot) {
+				while(arr[indexFromRight] > pivot) {
 						--indexFromRight;
 				}
 
@@ -47,10 +47,11 @@ int partition(int* arr, int first, int last) {
 						done = true;
 				}
 		}	
-				swap(arr[privotIndex], arr[indexFromLeft]);
-				privotIndex = indexFromLeft;
-				std::cout << "    " << privotIndex;
-				return privotIndex;
+				swap(arr[pivotIndex], arr[indexFromLeft]);
+				pivotIndex = indexFromLeft;
+
+				return pivotIndex;
+
 }
 
 void quickSort(int* arr, int first, int last) {
@@ -59,9 +60,9 @@ void quickSort(int* arr, int first, int last) {
 				sortFirstMiddleLast(arr, first, mid, last);
 				return;
 		} else {
-				int privotIndex = partition(arr, first, last);
-				quickSort(arr, first, privotIndex);
-				quickSort(arr, privotIndex + 1, last);
+				int pivotIndex = partition(arr, first, last);
+				quickSort(arr, first, pivotIndex - 1);
+				quickSort(arr, pivotIndex + 1, last);
 		}
 }
 
